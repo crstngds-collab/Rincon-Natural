@@ -160,7 +160,7 @@ textarea{resize:vertical;min-height:60px;}
         </div>
         <div class="payment-opt" id="pay-mp" onclick="selectPayment('mp')">
           <span class="payment-icon">💳</span>
-          <div><div>Mercado Pago</div><div class="payment-sublabel">Comision del 4,99%</div></div>
+          <div><div>Mercado Pago</div><div class="payment-sublabel">Comisión del 4,99%</div></div>
         </div>
       </div>
       <div class="info-note" id="mp-note">
@@ -506,7 +506,7 @@ function sendOrder(){
   var il='';
   for(var i=0;i<items.length;i++) il+='- '+items[i].name+' '+items[i].ql+' -> '+fmtPrice(items[i].sub)+'\n';
   var dl=deliveryType==='entrega'?'\nEnvio Montevideo: $170\nDir: '+addr+'\nFecha: '+ddate+'\nHorario: '+timeLabel:'\nPick Up (sin costo)';
-  var mpl=paymentType==='mp'?'\nComision MP: '+fmtPrice((subtotal()+(deliveryType==='entrega'?170:0))*0.0499):'';
+  var mpl=paymentType==='mp'?'\nComisión MP: '+fmtPrice((subtotal()+(deliveryType==='entrega'?170:0))*0.0499):'';
   var nl=notes?'\nNotas: '+notes:'';
   var pn={efectivo:'Efectivo contra entrega',transferencia:'Transferencia bancaria',mp:'Mercado Pago'};
   var msg='NUEVO PEDIDO - Rincon Natural\n\nCliente: '+name+'\nTel: '+phone+'\n\nProductos:\n'+il+dl+mpl+'\n\nTOTAL: '+fmtPrice(total())+'\n'+pn[paymentType]+nl;
