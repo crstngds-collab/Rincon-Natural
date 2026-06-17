@@ -541,12 +541,13 @@ function sendOrder(){
   var il='';
   for(var i=0;i<items.length;i++) il+='• '+items[i].name+' '+items[i].ql+' $'+items[i].sub+'\n';
   var pn={efectivo:'Efectivo contra entrega',transferencia:'Transferencia bancaria',mp:'Mercado Pago'};
-  var mpl=paymentType==='mp'?'\nComisión MP: '+fmtPrice((subtotal()+(deliveryType==='entrega'?170:0))*0.0499):'';
+  var cel=deliveryType==='entrega'?'Costo envío: $170\n':'';
+  var mpl=paymentType==='mp'?'Comisión MP: '+fmtPrice((subtotal()+(deliveryType==='entrega'?170:0))*0.0499)+'\n':'';
   var dl=deliveryType==='entrega'
-    ?'ENVÍO MONTEVIDEO\nDirección: '+addr+'\nFecha: '+ddate+'\nHorario: '+timeLabel+'\nCosto: $170'
+    ?'ENVÍO MONTEVIDEO\nDirección: '+addr+'\nFecha: '+ddate+'\nHorario: '+timeLabel
     :'RETIRO PICK UP\nEloísa García Etchegoyhen De Lorenzo 2026, Malvín, Montevideo';
   var nl=notes?'\nNotas: '+notes:'';
-  var msg='NUEVO PEDIDO - RINCON NATURAL\n\nRESUMEN\n'+il+'TOTAL: '+fmtPrice(total())+mpl+'\n\nPAGO: '+pn[paymentType]+'\n\n'+dl+'\n\nCLIENTE\nNombre: '+name+'\nTel: '+phone+nl;
+  var msg='NUEVO PEDIDO - RINCON NATURAL\n\nRESUMEN\n'+il+cel+mpl+'TOTAL: '+fmtPrice(total())+'\n\nPAGO: '+pn[paymentType]+'\n\n'+dl+'\n\nCLIENTE\nNombre: '+name+'\nTel: '+phone+nl;
 
   try {
     var params='action=saveOrder'
