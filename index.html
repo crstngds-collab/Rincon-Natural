@@ -541,8 +541,8 @@ function sendOrder(){
   var il='';
   for(var i=0;i<items.length;i++) il+='• '+items[i].name+' '+items[i].ql+' $'+items[i].sub+'\n';
   var pn={efectivo:'Efectivo contra entrega',transferencia:'Transferencia bancaria',mp:'Mercado Pago'};
-  var cel=deliveryType==='entrega'?'Costo envío: $170\n':'';
-  var mpl=paymentType==='mp'?'Comisión MP: '+fmtPrice((subtotal()+(deliveryType==='entrega'?170:0))*0.0499)+'\n':'';
+  var cel=deliveryType==='entrega'?'Costo envío: '+(shippingCost()>0?fmtPrice(shippingCost()):'GRATIS')+'\n':'';
+  var mpl=paymentType==='mp'?'Comisión MP: '+fmtPrice((subtotal()+shippingCost())*0.0499)+'\n':'';
   var dl=deliveryType==='entrega'
     ?'ENVÍO MONTEVIDEO\nDirección: '+addr+'\nFecha: '+fmtDate(ddate)+'\nHorario: '+timeLabel
     :'RETIRO PICK UP\nEloísa García Etchegoyhen De Lorenzo 2026, Malvín, Montevideo';
