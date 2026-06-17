@@ -544,7 +544,7 @@ function sendOrder(){
   var cel=deliveryType==='entrega'?'Costo envío: $170\n':'';
   var mpl=paymentType==='mp'?'Comisión MP: '+fmtPrice((subtotal()+(deliveryType==='entrega'?170:0))*0.0499)+'\n':'';
   var dl=deliveryType==='entrega'
-    ?'ENVÍO MONTEVIDEO\nDirección: '+addr+'\nFecha: '+ddate+'\nHorario: '+timeLabel
+    ?'ENVÍO MONTEVIDEO\nDirección: '+addr+'\nFecha: '+fmtDate(ddate)+'\nHorario: '+timeLabel
     :'RETIRO PICK UP\nEloísa García Etchegoyhen De Lorenzo 2026, Malvín, Montevideo';
   var nl=notes?'\nNotas: '+notes:'';
   var msg='NUEVO PEDIDO - RINCON NATURAL\n\nRESUMEN\n'+il+cel+mpl+'TOTAL: '+fmtPrice(total())+'\n\nPAGO: '+pn[paymentType]+'\n\n'+dl+'\n\nCLIENTE\nNombre: '+name+'\nTel: '+phone+nl;
@@ -557,10 +557,10 @@ function sendOrder(){
       +'&productos='+encodeURIComponent(items.map(function(i){return i.name+' '+i.ql;}).join(' | '))
       +'&entrega='+encodeURIComponent(deliveryType==='entrega'?'Envio Montevideo':'Pick Up')
       +'&direccion='+encodeURIComponent(addr||'-')
-      +'&fechaEntrega='+encodeURIComponent(ddate||'-')
+      +'&fechaEntrega='+encodeURIComponent(ddate?fmtDate(ddate):'-')
       +'&horario='+encodeURIComponent(timeLabel||'-')
       +'&pago='+encodeURIComponent(pn[paymentType])
-      +'&total='+encodeURIComponent(fmtPrice(total()))
+      +'&total='+encodeURIComponent(Math.round(total()))
       +'&notas='+encodeURIComponent(notes||'-')
       +'&items='+encodeURIComponent(JSON.stringify(items.map(function(i){return {id:i.id,qty:i.qty};})));
     var img=new Image();
