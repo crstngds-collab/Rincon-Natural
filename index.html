@@ -554,7 +554,7 @@ function sendOrder(){
       +'&fecha='+encodeURIComponent(new Date().toLocaleString('es-AR'))
       +'&cliente='+encodeURIComponent(name)
       +'&telefono='+encodeURIComponent(phone)
-      +'&productos='+encodeURIComponent(items.map(function(i){return i.name+' '+i.ql;}).join(' | '))
+      +'&productos='+encodeURIComponent(items.map(function(i){return i.name+' '+i.ql+' $'+i.sub;}).join(' | '))
       +'&entrega='+encodeURIComponent(deliveryType==='entrega'?'Envio Montevideo':'Pick Up')
       +'&direccion='+encodeURIComponent(addr||'-')
       +'&fechaEntrega='+encodeURIComponent(ddate?fmtDate(ddate):'-')
