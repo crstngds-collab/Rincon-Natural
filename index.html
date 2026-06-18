@@ -270,7 +270,7 @@ var PRODUCTS = [
   {id:2,name:'Queso Parmesano',desc:'Queso parmesano artesanal. De a 1/2 kg.',pricePerUnit:175,pricePerKg:350,step:0.5},
   {id:5,name:'Dulce de Leche Piamonte',desc:'Dulce de leche Piamonte, pote 900g.',pricePerUnit:200,step:1,stepLabel:'pote'},
   {id:6,name:'Huevos Jumbo',desc:'Huevos frescos jumbo, maple x30.',pricePerUnit:280,step:1,stepLabel:'maple'},
-  {id:3,name:'Miel Frasco Vidrio',desc:'Miel natural, frasco vidrio 500g.',pricePerUnit:240,step:1,stepLabel:'frasco'},
+  {id:3,name:'Miel Frasco Vidrio',desc:'Miel natural, frasco vidrio 500g. <span style="color:#c0392b;font-weight:700;">Stock limitado.</span>',pricePerUnit:240,step:1,stepLabel:'frasco'},
   {id:4,name:'Miel Tarro Plastico',desc:'Miel natural, tarro plastico 500g.',pricePerUnit:200,step:1,stepLabel:'tarro'},
   {id:7,name:'Nueces Cuartos',desc:'Nueces cuartos peladas. 500 g.',pricePerUnit:380,pricePerKg:760,step:0.5},
   {id:8,name:'Almendras Naturales',desc:'Almendras naturales peladas. 500 g.',pricePerUnit:510,pricePerKg:1020,step:0.5},
@@ -529,14 +529,14 @@ function sendOrder(){
   document.getElementById('shop-form').style.display='none';
   showToast();
 
-  setTimeout(function(){
-    try{window.location.href='https://wa.me/59899503219?text='+encodeURIComponent(msg);}catch(e){}
-  },1500);
   if(paymentType==='mp'){
     setTimeout(function(){
       try{window.open('https://link.mercadopago.com.uy/cristinagodasi','_blank');}catch(e){}
-    },2500);
+    },2000);
   }
+  setTimeout(function(){
+    try{window.location.href='https://wa.me/59899503219?text='+encodeURIComponent(msg);}catch(e){}
+  },paymentType==='mp'?2500:2000);
 
   var il='';
   for(var i=0;i<items.length;i++) il+='• '+items[i].name+' '+items[i].ql+' $'+items[i].sub+'\n';
